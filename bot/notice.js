@@ -9,49 +9,55 @@ var request = require('request');
 var striptags = require('striptags');
 var deleteTag = require('/home/crazyrabbit/idbapi/tool/deleteTag.js');
 var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport()
+var transporter = nodemailer.createTransport();
 var page_link;
 var article_link = Array();
 /*
-try {
-    service = JSON.parse(fs.readFileSync('./data/service'));
-    var idbip = service['idbip'];
-    var idbport = service['idbport'];
-    var md5ip = service['md5ip'];
-    var md5port = service['md5port'];
-    var idip = service['idip'];
-    var idport = service['idport'];
-    var apikey = service['apikey'];
-    var dbname = service['dbname'];
+   try {
+   service = JSON.parse(fs.readFileSync('./data/service'));
+   var idbip = service['idbip'];
+   var idbport = service['idbport'];
+   var md5ip = service['md5ip'];
+   var md5port = service['md5port'];
+   var idip = service['idip'];
+   var idport = service['idport'];
+   var apikey = service['apikey'];
+   var dbname = service['dbname'];
 
-}
-catch (err) {
-    console.error(err);
-process.exit(9);
-}
-*/
-function convert(title,body,board,page,date,url){
-		var id,md5,title,author,thirdc,fourthc,time,content,reply_name,D,source,U,C,K,preview;
-        var record;
-		var content_temp;
-		var date = dateFormat(date, "yyyymmdd_HHMM");
-        findBoardGame(title,body,function(game,matchnums,type,matchlist){
+   }
+   catch (err) {
+   console.error(err);
+   process.exit(9);
+   }
+   */
+
+function convert(title,body,board,url){
+    var record;
+    var content_temp;
+
+    deleteTag.delhtml(body,function(result){
+        time = S(result).between("時間","\n");
+        time = he.decode(time);
+        result = S(result).between(time,"※ 發信站: 批踢踢實業坊(ptt.cc)");
+        result = he.decode(result);
+
+        findBoardGame(title,result,function(game,matchnums,type,matchlist){
             if(game!=-1&&type!=-1){
-                deleteTag.delhtml(body,function(data){
-                    data = S(data).between("作者").s;
-                    data = he.decode(data);
-                    //fs.appendFile('./ptt_data/'+board+'/'+date+'_ptt.rec',"Matching Nums:"+matchnums+matchlist+"\n"+data+"---------------------------------------\n");
-                    transporter.sendMail({
-                        from: 'crazyrabbit@boardgameinfor',
-                        to: 'willow111333@gmail.com',
-                        subject: title,
-                        text:'Matching Nums:'+matchnums+matchlist+"\n"+data
-                    });
-
+                //fs.appendFile('./ptt_data/'+board+'/'+date+'_ptt.rec',"Matching Nums:"+matchnums+matchlist+"\n"+data+"---------------------------------------\n");
+                transporter.sendMail({
+                    from: 'crazyrabbit@boardgameinfor',
+                    to: 'willow111333@gmail.com',
+                    subject: title,
+                    text:'Matching Nums:'+matchnums+matchlist+"\n"+"Link:"+url+"\n"+result
                 });
-
             }
         });
+
+
+    });
+
+
+
 }
 exports.convert = convert;
 

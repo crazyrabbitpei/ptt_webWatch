@@ -28,7 +28,7 @@ catch (err) {
 process.exit(9);
 }
 
-function convert(body,board,page,date,url){
+function convert(body,board,page,url){
 		var id,md5,title,author,thirdc,fourthc,time,content,reply_name,D,source,U,C,K,preview;
         var record;
 		var content_temp;
