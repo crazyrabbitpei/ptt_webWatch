@@ -50,7 +50,7 @@ function convert(title,body,board,url){
                 //fs.appendFile('./ptt_data/'+board+'/'+date+'_ptt.rec',"Matching Nums:"+matchnums+matchlist+"\n"+data+"---------------------------------------\n");
                 transporter.sendMail({
                     from: 'crazyrabbit@boardgameinfor',
-                    to: 'willow111333@gmail.com',
+                    to: '',
                     subject: title,
                     text:'Matching Nums:'+matchnums+matchlist+"\n"+"Link:"+url+"\n"+result
                 });
