@@ -34,12 +34,16 @@ var article_link = Array();
 function convert(title,body,board,url){
     var record;
     var content_temp;
-
+    
     deleteTag.delhtml(body,function(result){
         time = S(result).between("時間","\n");
         time = he.decode(time);
         result = S(result).between(time,"※ 發信站: 批踢踢實業坊(ptt.cc)");
         result = he.decode(result);
+        if(result==""||result=="\t\t"){
+            result = S(result).between(time,"※ 編輯");
+            result = he.decode(result);
+        }
 
         findBoardGame(title,result,function(game,matchnums,type,matchlist){
             if(game!=-1&&type!=-1){
