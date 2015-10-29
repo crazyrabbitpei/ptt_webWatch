@@ -1,0 +1,10 @@
+{
+    "boards":[
+    {
+        "name":"BoardGame"
+
+    }
+    ],
+    "data_dir":"./ptt_data",
+    "intervalPer":1000
+}

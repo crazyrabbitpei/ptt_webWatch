@@ -47,12 +47,11 @@ function convert(title,body,board,url){
 
         findBoardGame(title,result,function(game,matchnums,type,matchlist){
             if(game!=-1&&type!=-1){
-                //fs.appendFile('./ptt_data/'+board+'/'+date+'_ptt.rec',"Matching Nums:"+matchnums+matchlist+"\n"+data+"---------------------------------------\n");
                 transporter.sendMail({
-                    from: 'crazyrabbit@boardgameinfor',
-                    to: '',
+                    from: "crazyrabbit@boardgameinfor",
+                    to: "fordemo@gmail.com",
                     subject: title,
-                    text:'Matching Nums:'+matchnums+matchlist+"\n"+"Link:"+url+"\n"+result
+                    text: matchlist+"\nMatching Nums:"+matchnums+"\nLink:"+url+"\n"+result
                 });
             }
         });
@@ -74,7 +73,7 @@ function findBoardGame(title,body,callback){
     var game_matchnums=0;
     var namecheck=-1,typecheck=0,nomatchcheck=0;
     var games = game.split(",");
-    var matchlist="\tMatch list:none";
+    var matchlist="Match list:none";
     body =  body.toLowerCase();
     title = title.toLowerCase();
     //console.log("title:"+title);
