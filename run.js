@@ -13,7 +13,7 @@ function setBot(owner){
     new CronJob('00 00 9,19 * * *', function() {
         transporter.sendMail({
             from: 'crazyrabbit@boardgameinfor',
-            to: 'fordemo@gmail.com',
+            to: 'willow111333@gmail.com',
             subject:'[PTT] Bot Running',
             text:"I'm alive. :)"
         });

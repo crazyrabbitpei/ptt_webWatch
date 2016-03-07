@@ -12,24 +12,6 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport();
 var page_link;
 var article_link = Array();
-/*
-   try {
-   service = JSON.parse(fs.readFileSync('./data/service'));
-   var idbip = service['idbip'];
-   var idbport = service['idbport'];
-   var md5ip = service['md5ip'];
-   var md5port = service['md5port'];
-   var idip = service['idip'];
-   var idport = service['idport'];
-   var apikey = service['apikey'];
-   var dbname = service['dbname'];
-
-   }
-   catch (err) {
-   console.error(err);
-   process.exit(9);
-   }
-   */
 
 function convert(title,body,board,url){
     var record;
@@ -49,9 +31,9 @@ function convert(title,body,board,url){
             if(game!=-1&&type!=-1){
                 transporter.sendMail({
                     from: "crazyrabbit@boardgameinfor",
-                    to: "fordemo@gmail.com",
+                    to: "willow111333@gmail.com",
                     subject: title,
-                    text: matchlist+"\nMatching Nums:"+matchnums+"\nLink:"+url+"\n"+result
+                    text: "Match list:"+matchlist+"\nMatching Nums:"+matchnums+"\nLink:"+url+"\n"+result
                 });
             }
         });
@@ -73,7 +55,7 @@ function findBoardGame(title,body,callback){
     var game_matchnums=0;
     var namecheck=-1,typecheck=0,nomatchcheck=0;
     var games = game.split(",");
-    var matchlist="Match list:none";
+    var matchlist="";
     body =  body.toLowerCase();
     title = title.toLowerCase();
     //console.log("title:"+title);
@@ -85,7 +67,12 @@ function findBoardGame(title,body,callback){
             for(var i=0;i<games.length;i++){
                 //console.log("["+i+"]games:"+games[i]);
                 if((namecheck=body.indexOf(games[i]))!=-1){
-                    matchlist+=","+games[i];
+                    if(game_matchnums!=0){
+                        matchlist+=","+games[i];
+                    }
+                    else{
+                        matchlist+=games[i];
+                    }
                     game_matchnums++;
                 }
             }
@@ -107,7 +94,12 @@ function findBoardGame(title,body,callback){
             if((typecheck=body.indexOf(type))!=-1){
                 for(var i=0;i<games.length;i++){
                     if((namecheck=body.indexOf(games[i]))!=-1){
-                        matchlist+=matchlist+","+games[i];
+                        if(game_matchnums!=0){
+                            matchlist+=","+games[i];
+                        }
+                        else{
+                            matchlist+=games[i];
+                        }
                         game_matchnums++;
                     }
                 }
