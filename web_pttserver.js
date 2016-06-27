@@ -14,7 +14,7 @@ function pttBot(owner){
             console.log("run_bot error");   
         }
         else{
-            //console.log("name:"+name+" bname:"+bname+" index:"+index+" item:"+item);
+            console.log("name:"+name+" bname:"+bname+" index:"+index+" item:"+item);
             crawlIndex(name,bname,index,item);
         }
     });
@@ -109,7 +109,7 @@ function crawlIndex(name,bname,index,item){
         try{
             var $ = cheerio.load(body);
             var nextpage=0;
-            var  get_page = $("div > div > div.action-bar > div.btn-group.pull-right > a:nth-child(2).btn.wide");
+            var  get_page = $("div.btn-group.btn-group-paging > a:nth-child(2).btn.wide");
             page = parseInt(S(get_page.attr('href')).between('index','.html').s)+1;
 
         }

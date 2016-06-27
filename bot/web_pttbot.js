@@ -94,7 +94,7 @@ function start(body,board,current_page,end_page,citem,owner,timeper,callback){
                 text = article_text[linc];
                 href = article_link[linc];
                 if(typeof article_link[linc]=="undefined"){
-                    console.log("undefined");
+                    console.log("[404] current_page:"+current_page+" linc:"+linc+" article_link.length:"+article_link.length);
                     //console.log("linc:"+linc+" article_link.length:"+article_link.length);
                     linc++;
                     if(linc>=article_link.length){

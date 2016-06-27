@@ -6,7 +6,7 @@ var transporter = nodemailer.createTransport();
 setBot("peipei");
 
 function setBot(owner){
-    new CronJob('00 */1 * * * *', function() {
+    new CronJob('* * * * * *', function() {
         web_pttserver.pttBot(owner);
     }, null, true, 'Asia/Taipei');
 
